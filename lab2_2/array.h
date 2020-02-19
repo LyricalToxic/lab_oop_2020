@@ -4,18 +4,21 @@
 
 class Array
 {
-    unsigned int *arr;
-    int size;
-    bool isSortedInc;
-    bool isSortedDec;
+    unsigned int *array = nullptr;
+    int size = 0;
 public:
     Array();
-    Array(int size);
+    Array(Array &other_array);
+    Array(Array *other_array);
     ~Array();
-
-    void Init();
-    void Set_size(int array_size);
-    void
+    void Set(const unsigned int other_array[], int other_size);
+    void Show();
+    void Input();
+    Array Plus(Array &other_array);
+    Array Minus(Array &other_array);
+    Array Concate(Array &other_array);
+    void Ascending_sort();
+    void Descending_sort();
 };
 
 #endif // ARRAY_H
