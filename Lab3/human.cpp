@@ -3,22 +3,27 @@
 #include<iostream>
 using namespace std;
 
-Human::Human(string first_name, string soname, string last_name, int birthday, string sex)
-{
-    this->first_name = first_name;
-    this->last_name = last_name;
-    this->soname = soname;
-    this->birthday = birthday;
-    this->sex = sex;
-}
-Human::Human(){};
 
-void Human::SetAllHuman(string first_name, string soname, string last_name, int birthday, string sex){
-    this->first_name = first_name;
-    this->last_name = last_name;
-    this->soname = soname;
-    this->birthday = birthday;
-    this->sex = sex;
+Human::Human(){
+    this->first_name="";
+    this->soname="";
+    this->last_name="";
+    this->birthday=0;
+    this->sex="";
+};
+
+void Human::SetAllHuman(){
+    cout << "Enter "<<endl;
+    cout << " First name: ";
+    cin >> this->first_name;
+    cout << " Last name: ";
+    cin >> this->last_name;
+    cout << " Soname: ";
+    cin >> this->soname;
+    cout << " Bitrhday: ";
+    cin >> this->birthday;
+    cout << " Sex: ";
+    cin >> this->sex;
 }
 
 void Human::GetAllHuman(){
@@ -29,36 +34,46 @@ void Human::GetAllHuman(){
     cout<<"Sex: "<< this->sex<<endl;
 }
 
-void Human::SetFirtName(string first_name){
-    this->first_name = first_name;
+void Human::SetFirtName(){
+    cout << "Enter "<<endl;
+    cout << " First name: ";
+    cin >> this->first_name;
 }
 void Human::GetFirtName(){
     cout<<"First name: "<< this->first_name<<endl;
 }
 
-void Human::SetLastName(string last_name){
-    this->last_name = last_name;
+void Human::SetLastName(){
+    cout << "Enter "<<endl;
+    cout << " Last name: ";
+    cin >> this->last_name;
 }
 void Human::GetLastName(){
     cout<<"Last name: "<< this->last_name<<endl;
 }
 
-void Human::SetSoname(string soname){
-    this->soname = soname;
+void Human::SetSoname(){
+    cout << "Enter "<<endl;
+    cout << " Soname: ";
+    cin >> this->soname;
 }
 void Human::GetSoname(){
     cout<<"Soname: "<< this->soname<<endl;
 }
 
-void Human::SetBirthday(int birthday){
-    this->birthday = birthday;
+void Human::SetBirthday(){
+    cout << "Enter "<<endl;
+    cout << " Bitrhday: ";
+    cin >> this->birthday;
 }
 void Human::GetBirthday(){
       cout<<"Birthday: "<< this->birthday<<endl;
 }
 
-void Human::SetSex(string sex){
-    this->sex = sex;
+void Human::SetSex(){
+    cout << "Enter "<<endl;
+    cout << " Sex: ";
+    cin >> this->sex;
 }
 void Human::GetSex(){
       cout<<"Sex: "<< this->sex<<endl;

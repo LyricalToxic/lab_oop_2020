@@ -2,35 +2,22 @@
 #include "human.h"
 #include <string>
 #include<iostream>
+#include "book.h"
 using namespace std;
 UserLibrary::UserLibrary()
 {
-
+    ticket_number=-1;
+    date="00.00.2020";
+    books = nullptr;
+    count_books=0;
+    mounthly_fee=0;
+    status="";
 }
 
-UserLibrary::UserLibrary(int ticket_number, string date, string **books, int count_books, int mounthly_fee, string status){
-    this->ticket_number = ticket_number;
-    this->date = date;
-    this->count_books = count_books;
-    this->mounthly_fee = mounthly_fee;
-    this->status = status;
-    this->books = new string*[this->count_books];
-    for(int i=0; i<count_books; i++){
-        this->books[i] = new string[2];
-        this->books[i][0] = books[i][0];
-        this->books[i][1] = books[i][1];
-    }
-}
 
 UserLibrary::~UserLibrary(){
-
     if (this->books == nullptr){
         delete [] books;
-    } else {
-        for(int i=0; i<this->count_books; i++){
-            delete [] books[i];
-        }
-        delete []books;
     }
 }
 
@@ -38,69 +25,94 @@ void UserLibrary::GetAllUserLibrary(){
     cout <<"Ticket number: "<< this->ticket_number <<endl;
     cout <<"Date: "<< this->date <<endl;
     for(int i=0; i<this->count_books; i++){
-        cout <<"Books: "<< this->books[i][0]<<" Discription: " <<  this->books[i][1]<<endl;
+        cout <<"Books: "<< this->books[i].GetBook()<<" Discription: " <<  this->books[i].GetDescroption()<<endl;
     }
-    cout <<"Count books: "<< this->count_books <<endl;
+    cout <<"Number of  books: "<< this->count_books <<endl;
     cout <<"Mounthly fee: "<< this->mounthly_fee <<endl;
     cout <<"Status: "<< this->status <<endl;
 }
 
 
-void UserLibrary::SetAllUserLibrary(int ticket_number, string date, string **books, int count_books, int mounthly_fee, string status){
-    this->ticket_number = ticket_number;
-    this->date = date;
-    this->count_books = count_books;
-    this->mounthly_fee = mounthly_fee;
-    this->status = status;
+void UserLibrary::SetAllUserLibrary(){
+    cout << "Enter "<<endl;
+    cout <<" Ticket number: ";
+    cin>>this->ticket_number;
+    cout <<" Date: ";
+    cin>>this->date;
+    cout <<" Mounthly fee: ";
+    cin>>this->mounthly_fee;
+    cout <<" Status: ";
+    cin>>this->status;
+    cout<< " Number of books: ";
+    cin>>this->count_books;
     if (this->books != nullptr)
-        books = nullptr;
-        this->books = new string*[this->count_books];
+        delete [] books;
+    this->books = new Book[this->count_books];
+
     for(int i=0; i<count_books; i++){
-        this->books[i] = new string[2];
-        this->books[i][0] = books[i][0];
-        this->books[i][1] = books[i][1];
+        string _name;
+        cout <<" Book name: ";
+        cin>>_name;
+               this->books[i].SetBook(_name);
+        cout <<" Book descroption: ";
+        cin>>_name;
+       this->books[i].SetDescroption(_name);
     }
 }
 
-void UserLibrary::SetTicketNumber(int ticket_number){
-    this->ticket_number = ticket_number;
+void UserLibrary::SetTicketNumber(){
+    cout << "Enter "<<endl;
+    cout <<" Ticket number: ";
+     cin>> this->ticket_number;
 }
 void UserLibrary::GetTicketNumber(){
     cout <<"Ticket number: "<< this->ticket_number <<endl;
 }
 
-void UserLibrary::SetDate(string date){
-    this->date = date;
+void UserLibrary::SetDate(){
+    cout << "Enter "<<endl;
+    cout <<" Date: ";
+    cin>>this->date;
 }
 void UserLibrary::GetDate(){
     cout <<"Date: "<< this->date <<endl;
 }
 
-void UserLibrary::SetBooks(string **books, int count_books){
-    this->count_books = count_books;
+void UserLibrary::SetBooks(){
+    cout << "Enter "<<endl;
+    cout<< " Number of books: ";
+    cin>>this->count_books;
     if (this->books != nullptr)
-        books = nullptr;
-        this->books = new string*[this->count_books];
-    for(int i=0; i<this->count_books; i++){
-        this->books[i] = new string[2];
-        this->books[i][0] = books[i][0];
-        this->books[i][1] = books[i][1];
+        delete [] books;
+    this->books = new Book[this->count_books];
+    for(int i=0; i<count_books; i++){
+        string _name;
+        cout <<" Book name: ";
+        cin>>_name;
+               this->books[i].SetBook(_name);
+        cout <<" Book descroption: ";
+        cin>>_name;
+       this->books[i].SetDescroption(_name);
     }
 }
 void UserLibrary::GetBooks(){
     for(int i=0; i<this->count_books; i++){
-        cout <<"Books: "<< this->books[i][0]<<" Discription: " <<  this->books[i][1]<<endl;
+        cout <<"Books: "<< this->books[i].GetBook()<<" Discription: " <<  this->books[i].GetBook()<<endl;
     }
 }
-void UserLibrary::SetMounthlyFee(int mounthly_fee){
-    this->mounthly_fee = mounthly_fee;
+void UserLibrary::SetMounthlyFee(){
+    cout << "Enter "<<endl;
+    cout <<" Mounthly fee: ";
+    cin>>this->mounthly_fee;
 }
 void UserLibrary::GetMounthlyFee(){
     cout <<"Mounthly fee: "<< this->mounthly_fee <<endl;
 }
 
-void UserLibrary::SetStatus(string status){
-    this->status = status;
+void UserLibrary::SetStatus(){
+    cout << "Enter "<<endl;
+    cout <<" Status: ";
+    cin>>this->status;
 }
 void UserLibrary::GetStatus(){
     cout <<"Status: "<< this->status <<endl;
@@ -118,21 +130,23 @@ int UserLibrary::AnnualFee(){
     return this->mounthly_fee*12;
 }
 
-void UserLibrary::SetInformationBooks(string *information, int size){
-    int _size =size;
-    if (size>this->count_books){
-        _size = this->count_books;
-    }
+void UserLibrary::SetInformationBooks(){
+    int _size;
+    cout << "Enter "<<endl;
+    cout << " Number of book descroptions: "<<endl;
+    cin >> _size;
+    string information;
+    int num=0;
     for(int i=0; i<_size; i++){
-        this->books[i][1] = information[i];
+        cout << "  Descroption number: "<<endl;
+        cin >> num;
+        if (num-1 > this->count_books){
+            cout<< "Number must be less then "<< this->count_books<<endl;
+        }
+        cout << "  Descroption: "<<endl;
+        cin >> information;
+        this->books[num-1].SetDescroption(information);
     }
 }
 
-string UserLibrary::SetInformationBooks(string information, int number_book){
-    if (number_book-1 <= this->count_books){
-    this->books[number_book-1][1] = information;
-    } else {
-        return "Number book out of range";
-    }
-}
 

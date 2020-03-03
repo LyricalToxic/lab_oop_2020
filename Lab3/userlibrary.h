@@ -1,28 +1,28 @@
 #ifndef USERLIBRARY_H
 #define USERLIBRARY_H
 #include "human.h"
+#include "book.h"
 #include <string>
 using namespace std;
 
 class UserLibrary : public Human
 {
-    int ticket_number=-1;
-    string date="00.00.2020";
-    string **books = nullptr;
-    int count_books=0;
+    int ticket_number;
+    string date;
+    Book *books;
+    int count_books;
     int mounthly_fee;
-    string status="";
+    string status;
 
 public:
     UserLibrary();
-    UserLibrary(int ticket_number, string date, string **books, int count_books, int mounthly_fee, string status);
     ~UserLibrary();
-    void SetAllUserLibrary(int ticket_number, string date, string **books, int count_books, int mounthly_fee, string status);
-    void SetTicketNumber(int ticket_number);
-    void SetDate(string date);
-    void SetBooks(string **books, int count_books);
-    void SetMounthlyFee(int mounthly_fee);
-    void SetStatus(string status);
+    void SetAllUserLibrary();
+    void SetTicketNumber();
+    void SetDate();
+    void SetBooks();
+    void SetMounthlyFee();
+    void SetStatus();
     void GetAllUserLibrary();
     void GetTicketNumber();
     void GetDate();
@@ -31,8 +31,7 @@ public:
     void GetStatus();
     float Discount();
     int AnnualFee();
-    void SetInformationBooks(string *information, int size);
-    string SetInformationBooks(string information, int number_book=0);
+    void SetInformationBooks();
 
 };
 
